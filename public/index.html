@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+    <head>
+        <title>SynthJS</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="./public/style.css"/>
+        
+        
+    </head>
+    <body>
+        <div class="container">
+            <main>
+                <div id='piano_container'>
+                </div>
+            </main>
+            
+            <footer>
+
+
+
+            <div id='synth_fx'>
+                
+                <div id='synth_params'>
+                    <div id='param_title'>
+                        <div>
+                            <h1>REVERB</h1>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="check_system" id="reverbCheck" onclick="reverbCheck()"/>
+                        </div>
+                    </div>
+                    <div id='param'>
+                        <h2>Room Size:</h2>
+                        <output for="fader" id="reverb_room_size">0.5</output>
+                        <input type="range" min="0" max="1" value="0.5" id="fader_room_size" 
+                        step="0.001" oninput="changeReverbRoomSize(value)">
+                    
+                        <h2>Dampening:</h2>
+                        <output for="fader" id="reverb_dampening">3000</output>
+                        <input type="range" min="0" max="5000" value="3000" id="fader_reverb_dampening" 
+                        step="0.01" oninput="changeReverbDampening(value)">
+                 
+                        <h2>Decay: </h2>
+                        <output for="fader" id="reverb_decay">1.5</output>
+                        <input type="range" min="0" max="1" value="1.5" id="fader_reverb_decay" 
+                        step="0.01" oninput="changeReverbDecay(value)">
+                 
+                        <h2>Pre Delay</h2>
+                        <output for="fader" id="reverb_predelay">0.01</output>
+                        <input type="range" min="0" max="1" value="0.01" id="fader_reverb_predelay" 
+                        step="0.01" oninput="changeReverbPreDelay(value)">
+                    </div>
+                </div>
+
+                <div id='synth_params'>
+                    <div id='param_title'>
+                    <h1>FEEDBACK DELAY</h1>
+                        <input type="checkbox" name="check_system" id="fDelayCheck" onclick="fDelayCheck()"/>
+                    </div>
+                    <div id='param'>
+                        <h2>Delay Time</h2>
+                        <output for="fader" id="fdelay_delay_time">0.25ms</output>
+                        <input type="range" min="0" max="1" value="0.25" id="fader_fdelay_delay_time" 
+                        step="0.001" oninput="changeFDelayDTime(value)">
+                  
+                        <h2>Max Delay:</h2> 
+                        <output for="fader" id="fdelay_max_delay">1</output>
+                        <input type="range" min="0" max="1" value="1" id="fader_fdelay_max_delay" 
+                        step="0.01" oninput="changeFDelayMaxDelay(value)">
+                    </div>
+
+                </div>
+
+                <div id='synth_params'>
+                    <div id='param_title'>
+                    <h1>PING PONG DELAY</h1>
+                        <input type="checkbox" name="check_system" id="ppDelayCheck" onclick="ppDelayCheck()"/>
+                    </div>
+                    <div id='param'>
+                    <h2>Delay Time</h2>
+                        <output for="fader" id="ppdelay_delay_time">0.25ms</output>
+                        <input type="range" min="0" max="1" value="0.25" id="fader_ppdelay_delay_time" 
+                        step="0.001" oninput="changePPDelayDTime(value)">
+                    
+                    <h2>Max Delay: </h2>
+                        <output for="fader" id="ppdelay_max_delay">1</output>
+                        <input type="range" min="0" max="1" value="1" id="fader_ppdelay_max_delay" 
+                        step="0.01" oninput="changePPDelayMaxDelay(value)">
+                    </div>
+
+                </div>
+
+                <div id='synth_params'>
+                    <div id='param_title'>
+                    <h1>CHORUS</h1>
+                        <input type="checkbox" name="check_system" id="chorusCheck" onclick="chorusCheck()"/>
+                    </div>
+                    <div id='param'>
+                    <h2>Frequency:</h2> 
+                        <output for="fader" id="chorus_frequency">1.5hz</output>
+                        <input type="range" min="0" max="20" value="1.5" id="fader_chorus_freq" 
+                        step="0.01" oninput="changeChorusFrequency(value)">
+                    
+                    <h2>Delay Time: </h2>
+                        <output for="fader" id="chorus_delay_time">3.5ms</output>
+                        <input type="range" min="3" max="15" value="3.5" id="fader_chorus_delay_time" 
+                        step="0.01" oninput="changeChorusDelayTime(value)">
+                    
+                    <h2> Depth (DRY/WET): </h2>
+                        <output for="fader" id="chorus_depth">0.7%</output>
+                        <input type="range" min="0" max="1" value="0.7" id="fader_chorus_depth" 
+                        step="0.1" oninput="changeChorusDepth(value)">
+
+                    <h2>   Type: </h2>
+                        <output for="fader" id="chorus_type">1</output>
+                        <input type="range" min="1" max="4" value="1" id="fader_chorus_type" 
+                        step="1" oninput="changeChorusType(value)">
+                    </div>
+
+                    <div id='param'>
+                       <h2>Sprend </h2>
+                        <output for="fader" id="chorus_spread">180</output>
+                        <input type="range" min="0" max="500" value="180" id="fader_chorus_spread" 
+                        step="1" oninput="changeChorusSpread(value)">
+                    </div>
+                </div>
+
+                <div id='synth_params'>
+                    <div id='param_title'>
+                    <h1>PHASER</h1>
+                        <input type="checkbox" name="check_system" id="phaserCheck" onclick="phaserCheck()"/>
+                    </div>
+                    <div id='param'>
+                        <h2>Frequency: </h2>
+                        <output for="fader" id="phaser_frequency">0.5hz</output>
+                        <input type="range" min="0" max="20" value="0.5" id="fader_phaser_freq" 
+                        step="0.01" oninput="changePhaserFrequency(value)">
+                    
+                        <h2>Octaves: </h2>
+                        <output for="fader" id="phaser_octaves">3</output>
+                        <input type="range" min="1" max="8" value="3" id="fader_phaser_octaves" 
+                        step="1" oninput="changePhaserOctaves(value)">
+                    
+                        <h2>Stages:</h2>
+                        <output for="fader" id="phaser_stages">10</output>
+                        <input type="range" min="1" max="20" value="10" id="fader_phaser_stages" 
+                        step="0.1" oninput="changePhaserStages(value)">
+                    
+                        <h2>Quality: </h2>
+                        <output for="fader" id="phaser_q">10</output>
+                        <input type="range" min="1" max="20" value="10" id="fader_phaser_q" 
+                        step="1" oninput="changePhaserQ(value)">
+                    
+                        <h2>BaseFrequency: </h2>
+                        <output for="fader" id="phaser_bfq">350hz</output>
+                        <input type="range" min="20" max="20000" value="350" id="fader_phaser_bfq" 
+                        step="1" oninput="changePhaserFreq(value)">
+                    </div>
+                </div>
+
+                <div id='synth_params'>
+                    <div id='param_title'>
+                    <h1>TREMOLO</h1>
+                        <input type="checkbox" name="check_system" id="tremoloCheck" onclick="tremoloCheck()"/>
+                    </div>
+                    <div id='param'>
+                        <h2>Frequency: </h2>
+                        <output for="fader" id="tremolo_frequency">10hz</output>
+                        <input type="range" min="0" max="50" value="10" id="fader_tremolo_freq" 
+                        step="0.1" oninput="changeTremoloFrequency(value)">
+                    
+                        <h2>Depth:</h2> 
+                        <output for="fader" id="tremolo_depth">0.5%</output>
+                        <input type="range" min="0" max="1" value="0.5" id="fader_tremolo_depth" 
+                        step="0.1" oninput="changeTremoloDepth(value)">
+                    
+                        <h2>Type:</h2> 
+                        <output for="fader" id="tremolo_type">1</output>
+                        <input type="range" min="1" max="4" value="1" id="fader_tremolo_type" 
+                        step="1" oninput="changeTremoloType(value)">
+                        
+                        <h2>Sprend:</h2>
+                        <output for="fader" id="tremolo_spread">180</output>
+                        <input type="range" min="0" max="500" value="180" id="fader_tremolo_spread" 
+                        step="1" oninput="changeTremoloSpread(value)">
+                    </div>
+                </div>
+
+                <div id='synth_params'>
+                    <div id='param_title'>
+                    <h1>FILTER</h1>
+                        <input type="checkbox" name="check_system" id="phaserCheck" onclick="phaserCheck()"/>
+                    </div>
+                    <div id='param'>
+                        <h2>Lowpass:</h2>
+                        <output for="fader" id="filter_lowpass">440hz</output>
+                        <input type="range" min="20" max="20000" value="20" id="fader_filter_lowpass" 
+                        step="1" oninput="changeFilterLowPass(value)">
+                    </div>
+                    
+                </div>
+
+                
+            </div>  
+
+
+            <div id='synth'>
+                <div id='synth_params'>
+                    
+                        Oscillator type: 
+                        <output for="fader" id="oscillatorType">1</output>
+                        <input type="range" min="1" max="4" value="1" id="fader_oscillator" 
+                        step="1" oninput="changeOscillatorType(value)">
+                    
+                </div>
+
+
+                <div id='synth_params'>
+                    
+                        Attack:
+                        <output for="fader" id="attack"> 0.005ms</output>
+                        <input type="range" min="0" max="16" value="0.005" id="fader_atk" 
+                        step="0.001" oninput="changeAtk(value)">
+                    
+               
+                    
+                        Decay:
+                        <output for="fader" id="decay">0.1ms</output>
+                        <input type="range" min="0" max="16" value="0.1" id="fader_dec" 
+                        step="0.001" oninput="changeDec(value)">
+                    
+
+                        Sustain:
+                        <output for="fader" id="sustain">0.9</output>
+                        <input type="range" min="0" max="1" value="0.9" id="fader_sus" 
+                        step="0.001" oninput="changeSus(value)">
+               
+
+                        Release: 
+                        <output for="fader" id="release">1ms</output>
+                        <input type="range" min="0" max="16" value="1" id="fader_rel" 
+                        step="0.001" oninput="changeRel(value)">
+ 
+                </div>
+
+                <div id='synth_params'>
+               
+                        Voices: 
+                        <output for="fader" id="voices">1</output>
+                        <input type="range" min="1" max="32" value="1" id="fader_voices" 
+                        step="1" oninput="changeVoices(value)">
+   
+
+                        Detune: 
+                        <output for="fader" id="detune">0</output>
+                        <input type="range" min="-2000" max="2000" value="0" id="fader_detune" 
+                        step="1" oninput="changeDetune(value)">
+
+                        Volume: 
+                        <output for="fader" id="volume">-6</output>
+                        <input type="range" min="-100" max="0" value="6" id="fader_volume" 
+                        step="0.01" oninput="changeVolume(value)">
+
+
+                        Octave: 
+                        <output for="fader" id="octave">3</output>
+                        <input type="range" min="1" max="8" value="3" id="fader_octave" 
+                        step="1" oninput="changeOctave(value)">
+
+                </div>
+            </div>
+                
+                
+
+            </footer>
+            <script src="./public/Tone.js"></script>
+            <script src="https://unpkg.com/@tonejs/midi"></script>
+            <script src="./public/start.js"></script> 
+        </div>
+    </body>
+</html>
