@@ -1,2 +1,2 @@
 # js-synth
-Sintetizador desenvolvido usando a biblioteca Tone.js como base.
+Sintetizador de audio desenvolvido com a biblioteca Tone.js
